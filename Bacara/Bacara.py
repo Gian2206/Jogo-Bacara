@@ -40,6 +40,12 @@ del Baralho1[Baralho1.index(sorteio_jogador2)]
 #Soma as cartas do jogador
 soma_jogador = sorteio_jogador1+sorteio_jogador2
 
+#Transforma em string a variável soma_jogador
+soma_jogador = str(soma_jogador)
+
+#A variável soma_jogador recebe o valor das unidades 
+soma_jogador = int(soma_jogador[len(soma_jogador)-1])
+
 #Sorteia primeira carta da banca
 sorteio_banca1 = random.choice(Baralho1)
 
@@ -54,3 +60,30 @@ del Baralho1[Baralho1.index(sorteio_banca2)]
 
 #Soma as cartas da banca
 soma_banca = sorteio_banca1+sorteio_banca2
+
+#Transforma em string a variável soma_banca
+soma_banca = str(soma_banca)
+
+#A variável soma_banca recebe o valor das unidades 
+soma_banca = int(soma_banca[len(soma_banca)-1])
+
+#Função para decidir o ganhador
+def comparar(jogador, banca, ganhador,aposta, fichas):
+    if jogador > banca and ganhador == "jogador":
+        fichas=aposta+fichas
+    elif jogador> banca:
+        fichas=fichas - aposta
+    elif jogador < banca and ganhador == "banca":
+        fichas=fichas+int(0.95*aposta)
+    elif jogador < banca:
+        fichas=fichas - aposta
+    elif banca == jogador and ganhador == "empate":
+        fichas = fichas + 8*aposta
+    elif jogador == banca:
+        fichas = fichas - aposta
+    return fichas
+
+#Caso a soma das duas cartas da banca e/ou jogador seja 8 ou 9
+if soma_banca== 8 or soma_banca==9 or soma_jogador==8 or soma_jogador==9:
+    fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
+
