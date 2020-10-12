@@ -2,9 +2,11 @@
 # Equipe: Giancarlo Vanoni Ruggiero
 # Data: 09/10/2020
 
+#Importa biblioteca random
 import random
 
 print("Bem-vindo ao jogo bacará")
+
 #Quantidade de fichas do jogador
 fichas=100 
 
@@ -69,26 +71,72 @@ soma_banca = int(soma_banca[len(soma_banca)-1])
 
 #Função para decidir o ganhador
 def comparar(jogador, banca, ganhador,aposta, fichas):
-#Se o jogador apostar nele mesmo e o jogador ganhar
+        #Se o jogador apostar nele mesmo e o jogador ganhar
     if jogador > banca and ganhador == "jogador":
         fichas=aposta+fichas
-#Se o jogador ganhar e não tiver apostado nele mesmo    
+    #Se o jogador ganhar e não tiver apostado nele mesmo    
     elif jogador> banca:
         fichas=fichas - aposta
-#Se a banca ganhar e o jogador tiver apostado na banca
+    #Se a banca ganhar e o jogador tiver apostado na banca
     elif jogador < banca and ganhador == "banca":
         fichas=fichas+int(0.95*aposta)
-#Se a banca ganhar e o jogador não tiver apostado na banca
+    #Se a banca ganhar e o jogador não tiver apostado na banca
     elif jogador < banca:
         fichas=fichas - aposta
-#Se der empate e o jogador tiver apostado no empate        
+    #Se der empate e o jogador tiver apostado no empate        
     elif banca == jogador and ganhador == "empate":
         fichas = fichas + 8*aposta
-#Se der empate e o jogador não tiver apostado no empate
+    #Se der empate e o jogador não tiver apostado no empate
     elif jogador == banca:
         fichas = fichas - aposta
     return fichas
 
 #Caso a soma das duas cartas da banca e/ou jogador seja 8 ou 9
 if soma_banca== 8 or soma_banca==9 or soma_jogador==8 or soma_jogador==9:
+    #Chama a função para decidir o ganhador 
     fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
+
+#Caso a soma do jogador ou da banca seja menor ou igual a 5
+elif soma_banca <= 5 or soma_jogador <= 5:
+    #Caso a soma do jogador seja menor ou igual a 5
+    if soma_jogador <= 5:
+        #Sorteia a terceira carta do jogador
+        sorteio_jogador3 = random.choice(Baralho1)
+
+        #Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
+        del Baralho1[Baralho1.index(sorteio_jogador3)]
+        
+        #Soma as cartas do jogador
+        soma_jogador = soma_jogador+sorteio_jogador3
+
+        #Transforma em string a variável soma_jogador
+        soma_jogador = str(soma_jogador)
+
+        #A variável soma_jogador recebe o valor das unidades 
+        soma_jogador = int(soma_jogador[len(soma_jogador)-1])    
+    
+    #Caso a soma da banca seja menor ou igual a 5
+    if soma_banca <= 5:
+        
+        #Sorteia a terceira carta da banca
+        sorteio_banca3 = random.choice(Baralho1)
+
+        #Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
+        del Baralho1[Baralho1.index(sorteio_banca3)]
+        
+        #Soma as cartas do jogador
+        soma_banca = soma_banca+sorteio_banca3
+
+        #Transforma em string a variável soma_jogador
+        soma_banca = str(soma_banca)
+
+        #A variável soma_jogador recebe o valor das unidades 
+        soma_banca = int(soma_banca[len(soma_banca)-1])    
+    
+    #Chama a função para decidir o ganhador 
+    fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
+else:
+    #Chama a função para decidir o ganhador 
+    fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
+
+print("Seu total de fichas agora é: {0}".format(fichas))
