@@ -69,16 +69,22 @@ soma_banca = int(soma_banca[len(soma_banca)-1])
 
 #Função para decidir o ganhador
 def comparar(jogador, banca, ganhador,aposta, fichas):
+#Se o jogador apostar nele mesmo e o jogador ganhar
     if jogador > banca and ganhador == "jogador":
         fichas=aposta+fichas
+#Se o jogador ganhar e não tiver apostado nele mesmo    
     elif jogador> banca:
         fichas=fichas - aposta
+#Se a banca ganhar e o jogador tiver apostado na banca
     elif jogador < banca and ganhador == "banca":
         fichas=fichas+int(0.95*aposta)
+#Se a banca ganhar e o jogador não tiver apostado na banca
     elif jogador < banca:
         fichas=fichas - aposta
+#Se der empate e o jogador tiver apostado no empate        
     elif banca == jogador and ganhador == "empate":
         fichas = fichas + 8*aposta
+#Se der empate e o jogador não tiver apostado no empate
     elif jogador == banca:
         fichas = fichas - aposta
     return fichas
@@ -86,4 +92,3 @@ def comparar(jogador, banca, ganhador,aposta, fichas):
 #Caso a soma das duas cartas da banca e/ou jogador seja 8 ou 9
 if soma_banca== 8 or soma_banca==9 or soma_jogador==8 or soma_jogador==9:
     fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
-
