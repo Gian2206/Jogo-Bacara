@@ -2,6 +2,8 @@
 # Equipe: Giancarlo Vanoni Ruggiero
 # Data: 09/10/2020
 
+import random
+
 print("Bem-vindo ao jogo bacará")
 #Quantidade de fichas do jogador
 fichas=100 
@@ -22,3 +24,33 @@ ganhador=input("Deseja apostar na banca, no jogador ou no empate? Digite banca, 
 #Caso não digite o nome correto
 while ganhador != "banca" and ganhador != "jogador" and ganhador != "empate": 
         ganhador = input("Digite jogador, banca ou empate: ")
+
+#Sorteia primeira carta do jogador
+sorteio_jogador1 = random.choice(Baralho1)
+
+#Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
+del Baralho1[Baralho1.index(sorteio_jogador1)]
+
+#Realiza o sorteio da segunda carta do jogador
+sorteio_jogador2 = random.choice(Baralho1)
+
+#Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
+del Baralho1[Baralho1.index(sorteio_jogador2)]
+
+#Soma as cartas do jogador
+soma_jogador = sorteio_jogador1+sorteio_jogador2
+
+#Sorteia primeira carta da banca
+sorteio_banca1 = random.choice(Baralho1)
+
+#Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
+del Baralho1[Baralho1.index(sorteio_banca1)]
+
+#Realiza o sorteio da segunda carta da banca 
+sorteio_banca2 = random.choice(Baralho1) 
+
+#Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
+del Baralho1[Baralho1.index(sorteio_banca2)]
+
+#Soma as cartas da banca
+soma_banca = sorteio_banca1+sorteio_banca2
