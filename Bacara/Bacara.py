@@ -7,8 +7,28 @@ import random
 
 print("Bem-vindo ao jogo bacará")
 
+#Pergunta o número de jogadores
+numero_de_jogadores = int(input("Digite o número de jogadores: "))
+
+#Caso não digite um número de jogadores válido
+while numero_de_jogadores<1:
+    numero_de_jogadores =int(input("Digite um valor acima de 1 para definir a quantidade de jogadores: "))
+
+lista_jogadores=[] 
+n=1
+
+#Cria lista com jogadores
+while numero_de_jogadores>len(lista_jogadores):
+    jogador = "jogador "+ str(n)
+    lista_jogadores.append(jogador)
+    n+=1
+    
+
 #Quantidade de fichas do jogador
 fichas=100 
+
+#Cria lista com o número de fichas de cada jogador
+lista_fichas=[fichas]*numero_de_jogadores
 
 #Mais baralhos adicionados
 n= int(input("Deseja jogar com 1, 6, ou 8 baralhos? "))
