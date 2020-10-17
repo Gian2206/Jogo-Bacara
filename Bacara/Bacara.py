@@ -131,7 +131,7 @@ def comparar(jogador, banca, ganhador,aposta, fichas):
 if soma_banca== 8 or soma_banca==9 or soma_jogador==8 or soma_jogador==9:
     while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-        fichas= comparar(soma_jogador,soma_banca, ganhador, lista_apostas[j], lista_fichas[j])
+        fichas= comparar(soma_jogador,soma_banca, lista_tipo_de_aposta[j], lista_apostas[j], lista_fichas[j])
         lista_fichas[j]=fichas
         print("{0}, você possui {1} fichas no total".format(lista_jogadores[j],lista_fichas[j]))
         j+=1 
@@ -175,14 +175,14 @@ elif soma_banca <= 5 or soma_jogador <= 5:
     
     while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-        fichas= comparar(soma_jogador,soma_banca, ganhador, lista_apostas[j], lista_fichas[j])
+        fichas= comparar(soma_jogador,soma_banca, lista_tipo_de_aposta[j], lista_apostas[j], lista_fichas[j])
         lista_fichas[j]=fichas
         print("{0}, você possui {1} fichas no total".format(lista_jogadores[j],lista_fichas[j]))
         j+=1 
 else:
     while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-        fichas= comparar(soma_jogador,soma_banca, ganhador, lista_apostas[j], lista_fichas[j])
+        fichas= comparar(soma_jogador,soma_banca, lista_tipo_de_aposta[j], lista_apostas[j], lista_fichas[j])
         lista_fichas[j]=fichas
         print("{0}, você possui {1} fichas no total".format(lista_jogadores[j],lista_fichas[j]))
         j+=1   
