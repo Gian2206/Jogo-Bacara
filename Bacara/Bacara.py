@@ -14,8 +14,11 @@ numero_de_jogadores = int(input("Digite o número de jogadores: "))
 while numero_de_jogadores<1:
     numero_de_jogadores =int(input("Digite um valor acima de 1 para definir a quantidade de jogadores: "))
 
-lista_jogadores=[] 
+lista_jogadores=[]
+lista_apostas=[]
+lista_tipo_de_aposta=[] 
 n=1
+j=0
 
 #Cria lista com jogadores
 while numero_de_jogadores>len(lista_jogadores):
@@ -23,7 +26,6 @@ while numero_de_jogadores>len(lista_jogadores):
     lista_jogadores.append(jogador)
     n+=1
     
-
 #Quantidade de fichas do jogador
 fichas=100 
 
@@ -39,20 +41,25 @@ while n!= 1 and n!= 6 and n!=8:
 
 #Baralho 1 adicionado
 Baralho1=[1,2,3,4,5,6,7,8,9,0,0,0,0]*4*n
+while j<len(lista_jogadores):
+    #Quantidade de fichas a serem apostadas:
+    aposta=int(input("{0}, diga quantas fichas você deseja apostar, um valor entre 1 e {1}: ".format(lista_jogadores[j], lista_fichas[j])))
 
-#Quantidade de fichas a serem apostadas:
-aposta=int(input("Diga quantas fichas você deseja apostar, um valor entre 1 e {0}: ".format(fichas)))
+    #Caso o jogador digite um valor inválido de fichas
+    while aposta> fichas or aposta<=0: 
+        aposta=int(input("Digite um valor válido de fichas entre 1 e {0}: ".format(lista_fichas[j])))
+    
+    lista_apostas.append(aposta)
 
-#Caso o jogador digite um valor inválido de fichas
-while aposta> fichas or aposta<=0: 
-    aposta=int(input("Digite um valor válido de fichas entre 1 e {0}: ".format(fichas)))
+    #Para o jogador decidir quem irá ganhar
+    ganhador=input("{0}, deseja apostar na banca, no jogador ou no empate? Digite banca, jogador ou empate: ".format(lista_jogadores[j]))
 
-#Para o jogador decidir quem irá ganhar
-ganhador=input("Deseja apostar na banca, no jogador ou no empate? Digite banca, jogador ou empate: ")
-
-#Caso não digite o nome correto
-while ganhador != "banca" and ganhador != "jogador" and ganhador != "empate": 
+    #Caso não digite o nome correto
+    while ganhador != "banca" and ganhador != "jogador" and ganhador != "empate": 
         ganhador = input("Digite jogador, banca ou empate: ")
+
+    lista_tipo_de_aposta.append(ganhador)
+    j+=1
 
 #Sorteia primeira carta do jogador
 sorteio_jogador1 = random.choice(Baralho1)
@@ -120,8 +127,9 @@ def comparar(jogador, banca, ganhador,aposta, fichas):
 
 #Caso a soma das duas cartas da banca e/ou jogador seja 8 ou 9
 if soma_banca== 8 or soma_banca==9 or soma_jogador==8 or soma_jogador==9:
+    while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-    fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
+        fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
 
 #Caso a soma do jogador ou da banca seja menor ou igual a 5
 elif soma_banca <= 5 or soma_jogador <= 5:
