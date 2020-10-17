@@ -10,8 +10,15 @@ print("Bem-vindo ao jogo bacará")
 #Quantidade de fichas do jogador
 fichas=100 
 
+#Mais baralhos adicionados
+n= int(input("Deseja jogar com 1, 6, ou 8 baralhos? "))
+
+#Caso seja um valor de baralhos diferente de 1, 6 ou 8
+while n!= 1 and n!= 6 and n!=8:
+    n= int(input("Digite 1, 6 ou 8 para definir o número de baralho "))
+
 #Baralho 1 adicionado
-Baralho1=[1,2,3,4,5,6,7,8,9,0,0,0,0]*4 
+Baralho1=[1,2,3,4,5,6,7,8,9,0,0,0,0]*4*n
 
 #Quantidade de fichas a serem apostadas:
 aposta=int(input("Diga quantas fichas você deseja apostar, um valor entre 1 e {0}: ".format(fichas)))
