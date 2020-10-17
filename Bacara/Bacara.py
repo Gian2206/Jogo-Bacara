@@ -61,6 +61,8 @@ while j<len(lista_jogadores):
     lista_tipo_de_aposta.append(ganhador)
     j+=1
 
+j=0
+
 #Sorteia primeira carta do jogador
 sorteio_jogador1 = random.choice(Baralho1)
 
@@ -129,8 +131,11 @@ def comparar(jogador, banca, ganhador,aposta, fichas):
 if soma_banca== 8 or soma_banca==9 or soma_jogador==8 or soma_jogador==9:
     while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-        fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
-
+        fichas= comparar(soma_jogador,soma_banca, ganhador, lista_apostas[j], lista_fichas[j])
+        lista_fichas[j]=fichas
+        print("{0}, você possui {1} fichas no total".format(lista_jogadores[j],lista_fichas[j]))
+        j+=1 
+    j=0
 #Caso a soma do jogador ou da banca seja menor ou igual a 5
 elif soma_banca <= 5 or soma_jogador <= 5:
     #Caso a soma do jogador seja menor ou igual a 5
@@ -168,10 +173,16 @@ elif soma_banca <= 5 or soma_jogador <= 5:
         #A variável soma_jogador recebe o valor das unidades 
         soma_banca = int(soma_banca[len(soma_banca)-1])    
     
+    while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-    fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
+        fichas= comparar(soma_jogador,soma_banca, ganhador, lista_apostas[j], lista_fichas[j])
+        lista_fichas[j]=fichas
+        print("{0}, você possui {1} fichas no total".format(lista_jogadores[j],lista_fichas[j]))
+        j+=1 
 else:
+    while j<len(lista_jogadores):
     #Chama a função para decidir o ganhador 
-    fichas= comparar(soma_jogador,soma_banca, ganhador, aposta, fichas)
-
-print("Seu total de fichas agora é: {0}".format(fichas))
+        fichas= comparar(soma_jogador,soma_banca, ganhador, lista_apostas[j], lista_fichas[j])
+        lista_fichas[j]=fichas
+        print("{0}, você possui {1} fichas no total".format(lista_jogadores[j],lista_fichas[j]))
+        j+=1   
