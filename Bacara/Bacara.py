@@ -21,7 +21,7 @@ j=0
 
 #Cria lista com jogadores
 while numero_de_jogadores>len(lista_jogadores):
-    jogador = "jogador "+ str(n)
+    jogador = "Jogador "+ str(n)
     lista_jogadores.append(jogador)
     n+=1
     
@@ -38,6 +38,22 @@ n= int(input("Deseja jogar com 1, 6, ou 8 baralhos? "))
 while n!= 1 and n!= 6 and n!=8:
     n= int(input("Digite 1, 6 ou 8 para definir o número de baralho "))
 
+#Taxa de comissão da casa de acordo com a quantidade de baralho
+if n == 1:
+    tb=0.9899
+    tj=0.9871
+    te=0.8425
+
+elif n==6:
+    tj=0.9876
+    tb=0.9894
+    te=0.8556
+
+elif n==8:
+    tj=0.9876
+    tb=0.9894
+    te=0.8564
+
 jogo=True
 
 while jogo == True:
@@ -45,7 +61,7 @@ while jogo == True:
     lista_tipo_de_aposta=[] 
     #Baralho  adicionado
     Baralho1=[1,2,3,4,5,6,7,8,9,0,0,0,0]*4*n
-    #Cada jogador escolha o valor e a aposta
+    #Cada jogador escolhe o valor e a aposta
     while j<len(lista_jogadores):
         #Quantidade de fichas a serem apostadas:
         aposta=int(input("{0}, diga quantas fichas você deseja apostar, um valor entre 1 e {1}: ".format(lista_jogadores[j], lista_fichas[j])))
@@ -112,21 +128,21 @@ while jogo == True:
 
     #Função para decidir o ganhador
     def comparar(jogador, banca, ganhador,aposta, fichas):
-            #Se o jogador apostar nele mesmo e o jogador ganhar
+        #Se o jogador apostar nele mesmo e o jogador ganhar
         if jogador > banca and ganhador == "jogador":
-            fichas=aposta+fichas
+            fichas=int(aposta*tj+fichas)
         #Se o jogador ganhar e não tiver apostado nele mesmo    
         elif jogador> banca:
             fichas=fichas - aposta
         #Se a banca ganhar e o jogador tiver apostado na banca
         elif jogador < banca and ganhador == "banca":
-            fichas=fichas+int(0.95*aposta)
+            fichas=fichas+int(0.95*aposta*tb)
         #Se a banca ganhar e o jogador não tiver apostado na banca
         elif jogador < banca:
             fichas=fichas - aposta
         #Se der empate e o jogador tiver apostado no empate        
         elif banca == jogador and ganhador == "empate":
-            fichas = fichas + 8*aposta
+            fichas = fichas + int(8*aposta*te)
         #Se der empate e o jogador não tiver apostado no empate
         elif jogador == banca:
             fichas = fichas - aposta
