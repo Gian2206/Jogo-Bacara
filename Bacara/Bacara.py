@@ -125,7 +125,7 @@ while jogo == True:
 
     #A variável soma_banca recebe o valor das unidades 
     soma_banca = int(soma_banca[len(soma_banca)-1])
-
+    
     #Função para decidir o ganhador
     def comparar(jogador, banca, ganhador,aposta, fichas):
         #Se o jogador apostar nele mesmo e o jogador ganhar
@@ -159,11 +159,12 @@ while jogo == True:
         j=0
     #Caso a soma do jogador ou da banca seja menor ou igual a 5
     elif soma_banca <= 5 or soma_jogador <= 5:
+        sorteio_jogador3 = 0
         #Caso a soma do jogador seja menor ou igual a 5
         if soma_jogador <= 5:
             #Sorteia a terceira carta do jogador
             sorteio_jogador3 = random.choice(Baralho1)
-
+            
             #Tira a "carta" do baralho (no caso retira da lista o valor da carta) 
             del Baralho1[Baralho1.index(sorteio_jogador3)]
             
@@ -176,9 +177,8 @@ while jogo == True:
             #A variável soma_jogador recebe o valor das unidades 
             soma_jogador = int(soma_jogador[len(soma_jogador)-1])    
         
-        #Caso a soma da banca seja menor ou igual a 5
-        if soma_banca <= 5:
-            
+        #Condições especiais para sortear a carta da banca
+        if soma_banca <= 3 and not sorteio_jogador3 == 8 or soma_banca == 4 and sorteio_jogador3 >=2 and sorteio_jogador3 <= 7 or soma_banca == 5 and sorteio_jogador3>=4 and sorteio_jogador3<=7:
             #Sorteia a terceira carta da banca
             sorteio_banca3 = random.choice(Baralho1)
 
